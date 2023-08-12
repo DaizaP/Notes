@@ -4,8 +4,10 @@ import Model.Note as nT
 
 
 def add_note():
-    title = input("Введите заголовок заметки:\n")
-    body = input("Введите описание заметки:\n")
+    title = input("Введите заголовок заметки: ")
+    if title == "":
+        title = "Без названия"
+    body = input("Введите описание заметки: ")
     note = nT.Note(title=title, body=body)
     array_notes = lF.read_file()
     for i in array_notes:
@@ -21,7 +23,7 @@ def show(command):
 
     if array_notes:
         if command == "all":
-            print("ЖУРНАЛ ЗАМЕТОК:")
+            print("Все заметки:")
             for i in array_notes:
                 print(nT.Note.map_note(i))
 
@@ -65,18 +67,18 @@ def del_notes():
         wF.write_file(array_notes, 'a')
         print("Заметка с id: ", id, " успешно удалена!")
     else:
-        print("нет такого id")
+        print("Нет такого id")
 
 
 def change_note():
-    id = input("Введите ID изменяемой заметки: ")
+    id = input("Введите ID заметки: ")
     array_notes = lF.read_file()
     flag = True
     array_notes_new = []
     for i in array_notes:
         if id == nT.Note.get_id(i):
-            i.title = input("измените  заголовок:\n")
-            i.body = input("измените  описание:\n")
+            i.title = input("Измените  заголовок: ")
+            i.body = input("измените  описание: ")
             nT.Note.set_date(i)
             flag = False
         array_notes_new.append(i)
@@ -85,4 +87,4 @@ def change_note():
         wF.write_file(array_notes_new, 'a')
         print("Заметка с id: ", id, " успешно изменена!")
     else:
-        print("нет такого id")
+        print("Нет такого id")
