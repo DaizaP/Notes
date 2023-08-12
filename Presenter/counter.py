@@ -1,6 +1,7 @@
-id = 0;
+id = 0
+
 
 def counter():
-    global count
-    count += 1
-    return count
+    global id
+    id += 1
+    return id
